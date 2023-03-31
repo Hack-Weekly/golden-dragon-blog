@@ -23,12 +23,14 @@ from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from user import views as user_views
-
+from post import views as post_views
 
 router = routers.DefaultRouter()
 
 
 router.register(r'users', user_views.UserViewSet)
+router.register(r'posts', post_views.PostViewSet)
+router.register(r'comments', post_views.CommentViewSet)
 
 urlpatterns = [
     path('', RedirectView.as_view(url='/admin/', permanent=True)),
