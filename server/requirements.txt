@@ -1,0 +1,8 @@
+Django==4.1.7
+djangorestframework-simplejwt==5.2.2
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.2.2
+pydantic
+drf-spectacular==0.26.1
+djangorestframework-simplejwt
+django-cors-headers==3.13.0
