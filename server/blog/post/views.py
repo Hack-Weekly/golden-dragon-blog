@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
@@ -16,6 +16,8 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
+        if self.request.user.is_staff:
+            return Post.objects.all()
         return Post.objects.filter(user=self.request.user)
 
 
@@ -28,4 +30,6 @@ class CommentViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
+        if self.request.user.is_staff:
+            return Comment.objects.all()
         return Comment.objects.filter(user=self.request.user)
