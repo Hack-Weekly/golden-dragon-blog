@@ -16,6 +16,10 @@ class Comment(TimeStampedMixin):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     text = models.TextField()
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_at']
 
     def __str__(self):
-        return self.text
+        return '{} commented on {}'.format(self.user, self.post)
