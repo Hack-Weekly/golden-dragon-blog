@@ -1,8 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-
 from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
 
@@ -19,7 +18,6 @@ class PostViewSet(viewsets.ModelViewSet):
         if self.request.user.is_staff:
             return Post.objects.all()
         return Post.objects.filter(user=self.request.user)
-
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
