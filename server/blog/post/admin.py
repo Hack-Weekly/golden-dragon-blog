@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, Comment
+from .models import Post, Comment, PostCategory
 
 
 class CommentInline(admin.TabularInline):
@@ -8,9 +8,15 @@ class CommentInline(admin.TabularInline):
     extra = 1
 
 
+class PostCategoryInline(admin.TabularInline):
+    model = PostCategory
+    extra = 1
+
+
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'body', 'created_at', 'updated_at']
-    inlines = [CommentInline]
+    list_display = ['title', 'user', 'body', 'created_at', 'updated_at']
+    inlines = [CommentInline, PostCategoryInline]
+
 
 
