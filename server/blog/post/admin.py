@@ -19,4 +19,3 @@ class PostAdmin(admin.ModelAdmin):
     inlines = [CommentInline, PostCategoryInline]
 
 
-
