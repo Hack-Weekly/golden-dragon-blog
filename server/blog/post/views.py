@@ -7,8 +7,6 @@ from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
-    message = 'Editing posts is restricted to the author'
-
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
             return True
