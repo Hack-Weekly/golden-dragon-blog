@@ -4,7 +4,7 @@ import MenuIconButton from "./MenuIconField";
 function TitleBarComponent() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar>
+      <AppBar position="sticky">
         <Toolbar>
           <MenuIconButton />
           <Typography variant="h5" sx={{ flexGrow: 1 }}>
