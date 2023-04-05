@@ -1,4 +1,15 @@
-import { Card, CardActions, CardContent, Typography } from "@mui/material";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Typography,
+  Button,
+  Box,
+  CardActionArea,
+  IconButton,
+} from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
 
 function CardComponent() {
   const paraText =
@@ -6,12 +17,23 @@ function CardComponent() {
 
   return (
     <Card sx={{ m: 2 }}>
-      <CardContent>
-        <Typography variant="h5">This is a Card Title</Typography>
-        <Typography variant="p" sx={{ fontSize: 15 }}>
-          {paraText}
-        </Typography>
-      </CardContent>
+      <CardActionArea>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            <Box sx={{ fontWeight: 500 }}>This is a Card Title</Box>
+          </Typography>
+          <Typography variant="body2">{paraText}</Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <IconButton>
+          <FavoriteIcon />
+        </IconButton>
+        <IconButton>
+          <ShareIcon />
+        </IconButton>
+        <Button size="small">Learn More</Button>
+      </CardActions>
     </Card>
   );
 }
