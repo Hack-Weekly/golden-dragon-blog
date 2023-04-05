@@ -1,9 +1,12 @@
 import { Box, Toolbar } from "@mui/material";
 import TitleBarComponent from "./components/TitleBarComponent";
-import CardComponent from "./components/CardComponent";
 import Dashboard from "./routes/Dashboard";
 import BlogList from "./routes/BlogList";
 import Profile from "./routes/Profile";
+import LoginPage from "./routes/LoginPage";
+import NotificationProvider from "./notifications/NotificationProvider";
+
+
 import { Route, Routes, Outlet } from 'react-router-dom';
 import "./App.css";
 
@@ -12,9 +15,10 @@ function App() {
     <>
       <Routes>
       <Route path="/" element={<LayoutsWithNavbar />}>
-        <Route path="/" element={<Dashboard />}/>
+        <Route routeType={'public'} path="/" element={<Dashboard />}/>
         <Route path="/blogs" element={<BlogList />}/>
         <Route path="/profile" element={<Profile />}/>
+        <Route path="/login" element={<LoginPage/>}/>
       </Route>
       </Routes>
     </>
@@ -24,10 +28,12 @@ function App() {
 function LayoutsWithNavbar() {
   return (
     <>
-      <TitleBarComponent />
-      <div className="page-container">
-        <Outlet />
-      </div>
+      <NotificationProvider>
+        <TitleBarComponent />
+        <div className="page-container">
+          <Outlet />
+        </div>
+      </NotificationProvider>
     </>
   );
 }

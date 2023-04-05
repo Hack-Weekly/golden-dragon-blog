@@ -1,5 +1,6 @@
 import { AppBar, Toolbar, Button, Box, Typography } from "@mui/material";
 import MenuIconButton from "./MenuIconField";
+import { Link } from "react-router-dom"
 
 function TitleBarComponent() {
   return (
@@ -10,7 +11,7 @@ function TitleBarComponent() {
           <Typography variant="h5" sx={{ flexGrow: 1 }}>
             Golden Dragon Blog
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Link className="btn-link" to="/login">Login</Link>
         </Toolbar>
       </AppBar>
     </Box>
