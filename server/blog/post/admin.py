@@ -15,7 +15,7 @@ class PostAdmin(admin.ModelAdmin):
 
     fieldsets = [
         ('Main', {
-            'fields': ('title', 'body', ('user', 'category'),)
+            'fields': ('title', 'body', 'user', 'category',)
         }),
     ]
 
