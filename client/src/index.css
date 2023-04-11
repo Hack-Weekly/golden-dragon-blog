@@ -1,3 +1,5 @@
+@import "_variables.css";
+
 /* #root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -16,4 +18,43 @@
 
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* LoginPage.jsx */
+.login-page-container {
+  margin-top: 2rem !important;
+  display: flex;
+}
+
+.login-page-container .login-box {
+  padding: 1.5rem;
+  background-color: var(--gray-200);
+  border: 1px solid var(--gray-400);
+  border-radius: 16px;
+}
+
+
+/* Buttons */
+.btn-link {
+  text-decoration: none;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  padding: 6px 8px;
+  display: inline-flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 1.75;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  min-width: 64px;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02857em;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #fff;
+}
+.btn-link:hover {
+  background-color: rgba(0, 0, 0, 0.04);
 }

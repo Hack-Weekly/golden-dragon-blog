@@ -5,6 +5,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { Link } from "react-router-dom"
+import { useAuth } from "../services/auth";
 
 function ConditionalMenuItem({name, show, popup_state, link}) {
   if (!show) return null;
@@ -18,6 +19,7 @@ function ConditionalMenuItem({name, show, popup_state, link}) {
 }
 
 function MenuIconButton() {
+  const auth = useAuth();
   return (
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
@@ -28,7 +30,7 @@ function MenuIconButton() {
           <Menu {...bindMenu(popupState)}>
             <ConditionalMenuItem popup_state={popupState} name="Dashboard" link="/" show={true}/>
             <ConditionalMenuItem popup_state={popupState} name="Blogs" link="/blogs/" show={true}/>
-            <ConditionalMenuItem popup_state={popupState} name="Profile" link="/profile/" show={true}/>
+            <ConditionalMenuItem popup_state={popupState} name="Profile" link="/profile/" show={auth.user ? true : false}/>
           </Menu>
         </>
       )}
