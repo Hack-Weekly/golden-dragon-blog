@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     # third party
     'drf_spectacular',
     'corsheaders',
+    'rest_framework_simplejwt.token_blacklist',
+    'rest_framework',
 
     # local
     'user.apps.UserConfig',

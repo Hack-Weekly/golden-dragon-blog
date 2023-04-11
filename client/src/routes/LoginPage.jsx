@@ -1,16 +1,23 @@
 import { TextField, Grid, Button, Box } from "@mui/material";
 import { useReducer, useState, useRef } from "react";
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../services/auth.jsx"
 import useNotify from "../notifications/useNotify";
+
 
 
 function LoginPage() {
   const notify = useNotify();
+  const auth = useAuth();
+  const [newAccount, setNewAccount] = useState(false);
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
       username: "",
-      password: ""
+      password: "",
+      first_name: "",
+      last_name: "",
+      email: "",
     }
   );
 
@@ -20,36 +27,13 @@ function LoginPage() {
     return <Navigate to="/"/>;
   }
 
-  const handleSubmit = evt => {
+  const handleSubmit = async evt => {
     evt.preventDefault();
 
     let data = formInput;
-
-    fetch(`${import.meta.env.VITE_API_URL}/api/auth/login/`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (response?.access) {
-          localStorage.setItem('access_token', response.access);
-          localStorage.setItem('refresh_token', response.refresh);
-          console.log('Added token to localStorage')
-          notify({ title: "Logged in!", description: "You've been logged in."})
-          setToDashboard(true);
-        } else {
-          notify({
-            title: "Failed to login!",
-            description: "If you do not have an account, use the Create Account button below.",
-            type: "error",
-            timeout: 100000,
-          })
-        }
-      })
-      .catch(error => console.error("Error:", error));
+    const login_result = await auth.login(data);
+    if (login_result.msg) notify(login_result.msg);
+    if (login_result.success) setToDashboard(true);
   };
 
   const handleInput = evt => {
@@ -85,6 +69,36 @@ function LoginPage() {
               autoComplete="current-password"
               onChange={handleInput}
             />
+            {newAccount ? <>
+              <TextField
+                sx={{margin: '0.75rem 0'}}
+                required
+                fullWidth
+                name="first_name"
+                id="login-firstname-input"
+                label="First Name"
+                onChange={handleInput}
+              />
+              <TextField
+                sx={{margin: '0.75rem 0'}}
+                required
+                fullWidth
+                name="last_name"
+                id="login-lastname-input"
+                label="Last Name"
+                onChange={handleInput}
+              />
+              <TextField
+                sx={{margin: '0.75rem 0'}}
+                required
+                fullWidth
+                name="email"
+                id="login-email-input"
+                label="Email"
+                onChange={handleInput}
+              />
+            </> : null
+            }
             <Box sx={{display: 'flex', justifyContent: 'space-between', flexDirection: 'row-reverse'}}>
             <Button
               type="submit"
@@ -92,12 +106,21 @@ function LoginPage() {
               color="primary"
               variant="contained"
               disabled={false}
-            >Login</Button>
-            <Button
-              sx={{margin: '0.25rem 0'}}
-              color="primary"
-              variant="contained"
-            >Create Account</Button>
+            >{newAccount ? 'Create Account' : 'Login'}</Button>
+            {newAccount ?
+                <Button
+                  sx={{margin: '0.25rem 0'}}
+                  color="primary"
+                  variant="contained"
+                  onClick={() => setNewAccount(false)}
+                >Back</Button> :
+                <Button
+                  sx={{margin: '0.25rem 0'}}
+                  color="primary"
+                  variant="contained"
+                  onClick={() => setNewAccount(true)}
+                >Create Account</Button>
+            }
             </Box>
             </form>
           </Box>

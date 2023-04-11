@@ -24,6 +24,9 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from user import views as user_views
 from post import views as post_views
+from utils import views as utils_views
+
+from user.views import UserRouter
 
 router = routers.DefaultRouter()
 
@@ -33,12 +36,14 @@ router.register(r'posts', post_views.PostViewSet)
 router.register(r'comments', post_views.CommentViewSet)
 
 urlpatterns = [
+    path('api/', include(UserRouter.urls)),
     path('', RedirectView.as_view(url='/admin/', permanent=True)),
     path('admin/', admin.site.urls),
 
     # API
-    path("api/auth/login/", TokenObtainPairView.as_view()),
+    path("api/auth/login/", user_views.UserLogin.as_view()),
     path("api/auth/refresh/", TokenRefreshView.as_view()),
+    path("api/auth/logout/", utils_views.LogoutView.as_view()),
 
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),

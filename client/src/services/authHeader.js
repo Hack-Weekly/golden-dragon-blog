@@ -1,9 +1,8 @@
-function authHeader(url) {
+export default function authHeader() {
   // return auth header with jwt if user is logged in and request is to the api url
   const token = localStorage.getItem('access_token');
   const isLoggedIn = !!token;
-  const isApiUrl = url.startsWith(import.meta.env.VITE_API_URL);
-  if (isLoggedIn && isApiUrl) {
+  if (isLoggedIn) {
       return {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -13,5 +12,3 @@ function authHeader(url) {
       return {};
   }
 }
-
-export default authHeader
