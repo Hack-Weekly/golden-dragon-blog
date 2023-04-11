@@ -5,3 +5,10 @@ body {
 .page-container {
   margin: 16px;
 }
+
+/* Blog Posts */
+
+.title {
+  text-align: center;
+  padding: 3rem;
+}
