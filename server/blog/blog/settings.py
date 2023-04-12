@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     # third party
     'drf_spectacular',
     'corsheaders',
+    'rest_framework_simplejwt.token_blacklist',
+    'rest_framework',
 
     # local
     'user.apps.UserConfig',
@@ -57,7 +59,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 ROOT_URLCONF = 'blog.urls'
 

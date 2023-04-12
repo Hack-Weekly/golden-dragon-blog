@@ -2,8 +2,14 @@ import ProfileCard from "../components/ProfileCard";
 import CardComponent from "../components/CardComponent";
 import { Box, Card, Typography } from "@mui/material";
 import DogImg from "../assets/dog.png";
+import { useAuth } from "../services/auth";
+import { Navigate } from "react-router-dom";
 
 function Profile() {
+  const auth = useAuth();
+  if (!auth.checkAuth()) {
+    return <Navigate to="/login"/>;
+  }
   return (
     <>
       <Box
